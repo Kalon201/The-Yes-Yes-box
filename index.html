@@ -11,85 +11,112 @@
     <title>The Yes Yes Box</title>
     <style>
         body {
-            background-color: #1a1a1a; /* Darker background like the image */
-            color: #FFFFFF;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0; /* Light grey background */
+            color: #000;
+            font-family: 'Arial Black', Gadget, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         h1 {
             font-size: 3.5rem;
-            margin-bottom: 0;
+            margin: 20px 0 10px 0;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #f7f00c; /* Yellow accent for title */
+            border-bottom: 12px solid #000;
+            padding-bottom: 5px;
         }
 
         #subtitle {
             font-size: 1.2rem;
             margin-bottom: 40px;
-            color: #cccccc;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        /* The Grid Container */
+        /* The Mondrian Grid Container */
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two columns */
-            gap: 20px;
-            max-width: 600px;
+            /* 3 columns to allow for asymmetrical widths */
+            grid-template-columns: 1fr 0.5fr 1fr;
+            grid-auto-rows: 180px;
+            gap: 15px; /* Black "line" spacing */
+            max-width: 800px;
             width: 100%;
+            background-color: #000; /* This creates the black lines between blocks */
+            padding: 15px;
+            border: 15px solid #000;
         }
 
-        /* Styling each square button */
+        /* Base Tile Styling */
         .nav-button {
-            background-color: #f7f00c;
-            color: #000;
             text-decoration: none;
-            height: 180px; /* Square height */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 900;
+            font-size: 1.1rem;
             text-align: center;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 8px 0 #b3ad00; /* 3D effect */
+            text-transform: uppercase;
             padding: 20px;
+            transition: opacity 0.2s;
         }
 
         .nav-button:hover {
-            transform: translateY(-5px);
-            background-color: #fffb1f;
+            opacity: 0.8;
         }
 
-        .nav-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 4px 0 #b3ad00;
+        /* Grid Spanning & Colors based on image style */
+        .play-btn { 
+            grid-column: span 2; 
+            grid-row: span 2; 
+            background-color: #ff0000; /* Red */
+            color: #fff;
+        }
+
+        .tools-btn { 
+            background-color: #ffff00; /* Yellow */
+            color: #000;
+        }
+
+        .prox-btn { 
+            grid-column: span 1; 
+            background-color: #0000ff; /* Blue */
+            color: #fff;
+        }
+
+        .file-btn { 
+            grid-column: span 2; 
+            background-color: #ffffff; /* White */
+            color: #000;
         }
 
         .icon-placeholder {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
         footer {
-            margin-top: auto;
-            padding: 40px;
-            color: #888;
-            font-size: 0.9rem;
+            margin-top: 30px;
+            padding: 20px;
+            color: #444;
+            font-size: 0.8rem;
+            text-transform: uppercase;
         }
 
-        /* Mobile adjustment: stack buttons if screen is small */
-        @media (max-width: 500px) {
+        /* Mobile adjustment */
+        @media (max-width: 600px) {
             .button-grid {
                 grid-template-columns: 1fr;
+                grid-auto-rows: 150px;
+            }
+            .play-btn, .prox-btn, .file-btn {
+                grid-column: span 1;
+                grid-row: span 1;
             }
         }
     </style>
@@ -100,22 +127,22 @@
     <span id="subtitle">...</span>
 
     <div class="button-grid">
-        <a href="/projects" class="nav-button">
+        <a href="/projects" class="nav-button play-btn">
             <div class="icon-placeholder">🎮</div>
             Start Playing!
         </a>
         
-        <a href="/misc" class="nav-button">
+        <a href="/misc" class="nav-button tools-btn">
             <div class="icon-placeholder">⚙️</div>
-            Tools & Settings
+            Tools
         </a>
         
-        <a href="/tyyp" class="nav-button">
+        <a href="/tyyp" class="nav-button prox-btn">
             <div class="icon-placeholder">🌐</div>
-            TheYesYesProx
+            Proxy
         </a>
         
-        <a href="https://drive.google.com/uc?export=download&id=1GSLQ3fmsetOdhcd84NEdpHU7drfABtVR" class="nav-button">
+        <a href="https://drive.google.com/uc?export=download&id=1GSLQ3fmsetOdhcd84NEdpHU7drfABtVR" class="nav-button file-btn">
             <div class="icon-placeholder">📂</div>
             Download File
         </a>
