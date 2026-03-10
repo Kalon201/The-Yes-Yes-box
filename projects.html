@@ -2,147 +2,165 @@
 <html lang="en-US">
   <head>
     <title>Projects | The Yes Yes Box</title>
-    <meta property="og:title" content="Welcome to The Yes Yes Box, an game site." />
-    <meta property="og:site_name" content="The Yes Yes Box.github.io" />
-    <meta property="og:description" content="Welcome to The Yes Yes Box, an game site." />
-    <meta name="description" content="Welcome to The Yes Yes Box, an game site." />
-    <meta name="author" content="The Yes Yes Box" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="shortcut-icon" href="/favicon.ico" />
-    <script src="/js/main.js"></script>
     <style>
-      p {
+      body {
+        background-color: #f0f0f0; /* White/Grey background for high contrast */
+        color: #000;
+        font-family: 'Arial Black', sans-serif; /* Bold, blocky font */
+        margin: 0;
+        padding: 20px;
         text-align: center;
-        max-width: 600px;
-        margin: 20px auto;
       }
-      button {
-        cursor: pointer;
-        background-color: #FFFFFF;
-        border: true;
-        color: #474747;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
+
+      h1 {
+        font-size: 4rem;
+        text-transform: uppercase;
+        border-bottom: 10px solid black;
         display: inline-block;
-        font-size: 16px;
-        border-radius: 20px;
-        margin-top: 20px;
+        margin-bottom: 30px;
       }
+
+      /* Mondrian Grid Styling */
+      #game-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-auto-rows: 200px;
+        gap: 15px; /* Black "lines" effect */
+        background-color: #000; /* Grid lines */
+        padding: 15px;
+        border: 15px solid #000;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
       .game-link {
-        height: 400px;
-        width: 300px;
         text-decoration: none;
-      }
-      .game-tile {
-        background-color: #FFFFFF;
-        height: 400px;
-        width: 300px;
-        border-radius: 30px;
-      }
-      .game-icon {
-        border-radius: 30px;
-        width: 300px;
-        height: 300px;
-      }
-      .game-title {
-        font-size: 30px;
-        font-weight: bold;
-        color: #474747;
-        text-align: center;
-        margin: auto;
-      }
-      .flex-container {
+        position: relative;
+        overflow: hidden;
         display: flex;
-        flex-direction: row;
-        order: 0;
-        flex-grow: 0;
-        flex-wrap: wrap;
-        align-items: center;
+        flex-direction: column;
+        transition: transform 0.2s ease;
+      }
+
+      /* Randomly sizing tiles for asymmetry */
+      .game-link:nth-child(3n) { grid-column: span 2; }
+      .game-link:nth-child(5n) { grid-row: span 2; }
+
+      .game-tile {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-      }
-      .container {
+        align-items: center;
         padding: 10px;
+        box-sizing: border-box;
       }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
+
+      /* Color Palette from Image */
+      .bg-red { background-color: #ff0000; color: white; }
+      .bg-blue { background-color: #0000ff; color: white; }
+      .bg-yellow { background-color: #ffff00; color: black; }
+      .bg-white { background-color: #ffffff; color: black; }
+
+      .game-icon {
+        width: 60%;
+        height: auto;
+        border: 4px solid black;
+        background: white;
+        margin-bottom: 10px;
+      }
+
+      .game-title {
+        font-weight: 900;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .game-link:hover {
+        transform: scale(0.98);
+        filter: brightness(1.1);
+      }
+
+      #search {
+        width: 100%;
+        max-width: 500px;
+        padding: 15px;
+        border: 5px solid black;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        outline: none;
+      }
+
+      /* Back button styling */
+      .nav-btn {
+        background-color: #ffff00;
+        border: 5px solid black;
+        color: black;
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 30px;
+        text-transform: uppercase;
       }
     </style>
   </head>
-  <body style="background-color: #474747; color: #474747; font-family: sans-serif; text-decoration: none; text-align: center;">
-    <h1 style="font-size: 3em; text-align: center;">Products</h1>
-    <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for stuff..." style="width: 100%; font-size: 18px; padding: 6px 20px; margin: auto; border-radius: 30px; max-width: 600px; margin-bottom: 10px;" />
-    <div id="loader" style="display: block; border: 16px solid #111111; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 0.3s linear infinite; margin: auto; margin-top: 1rem;"></div>
-    <div id="game-container" class="flex-container"></div>
-    <p class="text-center">
-      <a href="/index.html" style="text-decoration: none;">
-        <button style="cursor: pointer; background-color: #f7f00c; border: none; color: black; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px; margin-top: 5px;">
-          Go to the homepage
-        </button>
-      </a>
-    </p>
-    <button id="back-to-top" style="display: none; position: fixed; bottom: 20px; right: 20px;">Back to top</button>
+  <body>
+
+    <h1>Products</h1>
+    
+    <div>
+        <input type="text" id="search" onkeyup="searchGames()" placeholder="SEARCH GAMES..." />
+    </div>
+
+    <div id="loader" style="border: 10px solid #000; border-top: 10px solid #ff0000; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin: 20px auto;"></div>
+
+    <div id="game-container"></div>
+
+    <a href="/index.html">
+        <button class="nav-btn">Back to Home</button>
+    </a>
+
     <script>
       let games = [];
-      fetch("config/games.json")
-      .then((response) => response.json())
-      .then((data) => {
-        games = data;
-        const container = document.getElementById("game-container");
-        data.forEach((project) => {
-          const game = document.createElement("a");
-          game.href = project.link;
-            game.className = "game-link container";
-            game.innerHTML = `
-            <div class="game-tile">
-              <img class="game-icon" src="${project.imgSrc}" alt="icon" />
-              <p class="game-title">${project.title}</p>
-              </div>`;
-              container.appendChild(game);
-          });
-          document.getElementById("loader").style.display = "none";
-        })
-        .catch((error) => console.error("Error:", error));
+      const colors = ['bg-red', 'bg-blue', 'bg-yellow', 'bg-white'];
 
-      function searchGames() {
-        const input = document.getElementById("search");
-        const filter = input.value.toUpperCase();
+      function renderGames(data) {
         const container = document.getElementById("game-container");
         container.innerHTML = "";
-        games
-          .filter((game) => game.title.toUpperCase().includes(filter))
-          .forEach((project) => {
-            const game = document.createElement("a");
-            game.href = project.link;
-            game.className = "game-link container";
-            game.innerHTML = `
-            <div class="game-tile">
+        data.forEach((project, index) => {
+          const colorClass = colors[index % colors.length];
+          const game = document.createElement("a");
+          game.href = project.link;
+          game.className = "game-link";
+          game.innerHTML = `
+            <div class="game-tile ${colorClass}">
               <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
               <p class="game-title">${project.title}</p>
-              </div>`;
-            container.appendChild(game);
-          });
-        }
-        const backToTopButton = document.getElementById('back-to-top');
-        window.onscroll = function () {
-          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            backToTopButton.style.display = "block";
-          } else {
-          backToTopButton.style.display = "none";
-        }
-      };
+            </div>`;
+          container.appendChild(game);
+        });
+      }
 
-      backToTopButton.onclick = function () {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-      };
+      fetch("config/games.json")
+        .then(res => res.json())
+        .then(data => {
+          games = data;
+          renderGames(games);
+          document.getElementById("loader").style.display = "none";
+        })
+        .catch(err => console.error(err));
+
+      function searchGames() {
+        const filter = document.getElementById("search").value.toUpperCase();
+        const filtered = games.filter(g => g.title.toUpperCase().includes(filter));
+        renderGames(filtered);
+      }
     </script>
+    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
   </body>
 </html>
