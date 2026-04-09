@@ -295,6 +295,11 @@
     "title": "Endless War 3"
   },
   {
+    "link": "projects/escaperoad/",
+    "imgSrc": "projects/escaperoad/escape-road.png",
+    "title": "Escape Road"
+  },
+  {
     "link": "projects/evil-glitch/",
     "imgSrc": "projects/evil-glitch/evil.png",
     "title": "Evil Glitch"
